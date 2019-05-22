@@ -1,0 +1,31 @@
+version: "3"
+services:
+  client:
+    build:
+      context: ./movie-ui/
+    command: npm start
+    volumes:
+      - ./movie-ui/:/usr/app
+      - /usr/app/node_modules
+    environment:
+      - API_URL=http://api:8000
+    ports:
+      - 3000:3000
+    depends_on:
+      - api
+  api:
+    build:
+      context: ./movie-api/
+    command: npm start
+    volumes:
+      - ./movie-api/:/usr/app
+      - /usr/app/node_modules
+    env_file: ./movie-api/.env.production
+    ports:
+      - 8000:8000
+    depends_on:
+      - redis
+  redis:
+    image: redis
+    expose:
+      - 6379

@@ -1,0 +1,4 @@
+export const REQUEST_MOVIES = "REQUEST_MOVIES";
+export const RECEIVE_MOVIES = "RECEIVE_MOVIES";
+export const RECEIVE_ERROR = "RECEIVE_ERROR";
+export const READ_CACHE = "READ_CACHE";

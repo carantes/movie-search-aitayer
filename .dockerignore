@@ -1,0 +1,6 @@
+.dockerignore
+.git
+.gitignore
+.prettierrc
+.prettierignore
+**/node_modules

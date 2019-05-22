@@ -1,0 +1,21 @@
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .wrapper > div {
+    width: 45%;
+    margin: 5px;
+    text-align: center;
+  }
+}
+
+@media (min-width: 769px) {
+  .wrapper > div {
+    width: 30%;
+    margin: 5px;
+    text-align: center;
+  }
+}
