@@ -25,3 +25,8 @@
 - .dockerignore
 
 ## Explicar utilização de Promsie.all ou mudar solução
+
+## Enviroments
+
+.env
+.env.production

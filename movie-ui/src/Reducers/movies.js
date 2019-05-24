@@ -2,7 +2,6 @@ import {
   REQUEST_MOVIES,
   RECEIVE_MOVIES,
   RECEIVE_ERROR,
-  READ_CACHE,
 } from "../Actions/types";
 
 const initialState = {
@@ -12,15 +11,7 @@ const initialState = {
 };
 
 function movies(state = initialState, action) {
-  const {
-    type,
-    payload,
-    loading,
-    movies,
-    receivedAt,
-    error,
-    receivedCacheAt,
-  } = action;
+  const { type, payload, loading, movies, receivedAt, error } = action;
   switch (type) {
     case REQUEST_MOVIES:
       return {
@@ -29,6 +20,7 @@ function movies(state = initialState, action) {
       };
     case RECEIVE_MOVIES:
       return {
+        payload,
         movies,
         receivedAt,
         loading,
@@ -37,12 +29,6 @@ function movies(state = initialState, action) {
       return {
         error,
         receivedAt,
-        loading,
-      };
-    case READ_CACHE:
-      return {
-        ...state,
-        receivedCacheAt,
         loading,
       };
     default:
