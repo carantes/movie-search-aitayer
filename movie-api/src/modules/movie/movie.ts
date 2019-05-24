@@ -39,9 +39,15 @@ class Movie {
     const data = await fetchHelper
       .getAll([urlPage1, urlPage2])
       .then(this.parseMovies);
+
     const cacheObj = req.app.get("cache"); //Redis
     await cacheObj.setAsync(req.originalUrl, JSON.stringify(data));
-    res.status(httpStatus.OK).json(data);
+    const cachePolicy = { "Cache-Control": "public", "max-age": 60 };
+
+    res
+      .header(cachePolicy)
+      .status(httpStatus.OK)
+      .json(data);
   };
 
   private flushCache = async (req: Request, res: Response) => {
