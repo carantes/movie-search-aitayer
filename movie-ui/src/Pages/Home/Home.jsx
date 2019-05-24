@@ -6,22 +6,21 @@ import { WAIT_INTERVAL, TYPE_COUNT } from "Utils";
 
 const Home = ({ movies, loading, getMovies }) => {
   const handleSearch = keyword => getMovies(keyword);
-  const { Wrapper, Header, Detail } = Layout;
+  const { Wrapper, Header, Main } = Layout;
 
   return (
     <Wrapper>
-      <Header>
-        <h1>Movie Search</h1>
+      <Header title="Movie Search">
         <Search
           onSearch={handleSearch}
           startWith={TYPE_COUNT}
           waitInterval={WAIT_INTERVAL}
         />
       </Header>
-      <Detail>
+      <Main>
         <ClipLoader loading={loading} />
         <MovieList movies={movies} />
-      </Detail>
+      </Main>
     </Wrapper>
   );
 };

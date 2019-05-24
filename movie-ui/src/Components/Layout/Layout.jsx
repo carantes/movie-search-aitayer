@@ -5,14 +5,17 @@ const Wrapper = ({ children }) => (
   <div className={styles.wrapper}>{children}</div>
 );
 
-const Header = ({ children }) => (
-  <div className={styles.header}>{children}</div>
+const Header = ({ title, children }) => (
+  <nav className={styles.header}>
+    <h1>{title}</h1>
+    {children}
+  </nav>
 );
 
-const Detail = ({ children }) => <div className={styles.main}>{children}</div>;
+const Main = ({ children }) => <main className={styles.main}>{children}</main>;
 
 export default {
   Wrapper,
   Header,
-  Detail,
+  Main,
 };
