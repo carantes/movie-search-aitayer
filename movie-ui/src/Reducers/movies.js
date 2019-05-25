@@ -4,14 +4,14 @@ import {
   RECEIVE_ERROR,
 } from "../Actions/types";
 
-const initialState = {
+export const initialState = {
   loading: false,
   movies: [],
   error: null,
 };
 
 function movies(state = initialState, action) {
-  const { type, payload, loading, movies, receivedAt, error } = action;
+  const { type, payload, loading, movies, error } = action;
   switch (type) {
     case REQUEST_MOVIES:
       return {
@@ -22,13 +22,11 @@ function movies(state = initialState, action) {
       return {
         payload,
         movies,
-        receivedAt,
         loading,
       };
     case RECEIVE_ERROR:
       return {
         error,
-        receivedAt,
         loading,
       };
     default:

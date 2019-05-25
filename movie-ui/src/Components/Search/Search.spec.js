@@ -15,7 +15,7 @@ describe("Search", () => {
     expect(search.exists()).toBe(true);
   });
 
-  it("should NOT callback search function before 3 characters", done => {
+  it("should do nothing before type 3 characters", done => {
     const input = search.find("input").at(0);
     input.instance().value = "ah";
     input.simulate("change");

@@ -12,7 +12,6 @@ const withMovies = WrappedComponent => {
   const moviesSelector = ({ movies }) => ({
     loading: movies.loading,
     movies: movies.movies,
-    lastRequest: movies.receivedAt,
   });
 
   const moviesActions = dispatch => ({

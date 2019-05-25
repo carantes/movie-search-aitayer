@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Movies reducer should handle RECEIVE_ERROR 1`] = `
+Object {
+  "error": undefined,
+  "loading": undefined,
+}
+`;
+
+exports[`Movies reducer should handle RECEIVE_MOVIES 1`] = `
+Object {
+  "loading": undefined,
+  "movies": undefined,
+  "payload": undefined,
+}
+`;
+
+exports[`Movies reducer should handle REQUEST_MOVIES 1`] = `
+Object {
+  "loading": undefined,
+  "payload": undefined,
+}
+`;
+
+exports[`Movies reducer should return the initial state 1`] = `
+Object {
+  "error": null,
+  "loading": false,
+  "movies": Array [],
+}
+`;

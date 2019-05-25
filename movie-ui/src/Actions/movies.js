@@ -14,7 +14,6 @@ function receiveMovies(movies, keyword) {
     type: RECEIVE_MOVIES,
     movies,
     keyword: keyword,
-    receivedAt: Date.now(),
     loading: false,
   };
 }
@@ -23,7 +22,6 @@ function receiveError(err) {
   return {
     type: RECEIVE_ERROR,
     error: err,
-    receivedAt: Date.now(),
     loading: false,
   };
 }
@@ -32,13 +30,14 @@ function parseData(movies) {
   return movies.filter(result => result !== null);
 }
 
-export function fetchGetMovies(keyword) {
+export const fetchGetMovies = keyword => {
+  const apiURL = keyword ? `api/search?keyword=${keyword}` : `api/search`;
+
   return async dispatch => {
     dispatch(requestMovies(keyword));
-
-    return await fetchHelper(`api/search?keyword=${keyword}`)
+    return await fetchHelper(apiURL)
       .then(parseData)
       .then(movies => dispatch(receiveMovies(movies, keyword)))
       .catch(err => dispatch(receiveError(err)));
   };
-}
+};
