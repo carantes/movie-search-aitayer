@@ -1,12 +1,11 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import { Application, Request, Response, NextFunction } from "express";
-import { errorHandler } from "../middleware";
 import * as helmet from "helmet";
 import * as responseTime from "response-time";
-import healthcheck from "../modules/healthcheck";
-import movie from "../modules/movie";
-import { promises } from "fs";
+import errorHandler from "@middleware/errorHandler";
+import healthcheck from "@modules/healthcheck";
+import movie from "@modules/movie";
 
 class Server {
   public app: Application;

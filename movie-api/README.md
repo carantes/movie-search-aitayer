@@ -30,3 +30,5 @@
 
 .env
 .env.production
+
+## Absolute Path and Aliases

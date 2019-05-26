@@ -9,7 +9,13 @@
     "experimentalDecorators": false,
     "emitDecoratorMetadata": false,
     "skipDefaultLibCheck": false,
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "paths": {
+      "@config/*": ["config/*"],
+      "@helpers/*": ["helpers/*"],
+      "@middleware/*": ["middleware/*"],
+      "@modules/*": ["modules/*"]
+    }
   },
   "include": ["/**/*.ts"],
   "exclude": ["node_modules"]

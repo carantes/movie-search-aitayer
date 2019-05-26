@@ -1,5 +1,5 @@
 import * as req from "supertest";
-import server from "../../config/server";
+import server from "@config/server";
 
 describe("[Modules] Healthcheck", () => {
   it("[Get] root path should return healthcheck message", async () => {

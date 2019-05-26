@@ -6,7 +6,8 @@
   "scripts": {
     "tsc": "tsc && node dist/app.js",
     "start": "nodemon",
-    "test": "jest --no-cache"
+    "test": "jest --no-cache",
+    "coverage": "npm test -- --coverage"
   },
   "keywords": [],
   "author": "",
@@ -18,11 +19,10 @@
     "express-validator": "^5.3.1",
     "helmet": "^3.18.0",
     "helmet-csp": "^2.7.1",
+    "module-alias": "^2.2.0",
     "node-fetch": "^2.5.0",
     "redis": "^2.8.0",
-    "response-time": "^2.3.2",
-    "supertest": "^4.0.2",
-    "ts-jest": "^24.0.2"
+    "response-time": "^2.3.2"
   },
   "devDependencies": {
     "@types/body-parser": "^1.17.0",
@@ -38,8 +38,16 @@
     "concurrently": "^4.1.0",
     "jest": "^24.8.0",
     "nodemon": "^1.19.0",
+    "supertest": "^4.0.2",
+    "ts-jest": "^24.0.2",
     "ts-node": "^8.1.0",
     "typescript": "^3.4.5"
+  },
+  "_moduleAliases": {
+    "@config": "dist/config",
+    "@helpers": "dist/helpers",
+    "@middleware": "dist/middleware",
+    "@modules": "dist/modules"
   },
   "jest": {
     "transform": {

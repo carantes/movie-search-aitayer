@@ -1,5 +1,8 @@
-import { server, Cache } from "./config";
+import "module-alias/register";
 import * as dotenv from "dotenv";
+import server from "@config/server";
+import Cache from "@config/Cache";
+
 dotenv.config();
 
 const {

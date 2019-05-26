@@ -1,7 +1,8 @@
 import { Router, Request, Response, NextFunction, response } from "express";
 import { check, validationResult } from "express-validator/check";
-import { cacheHandler } from "../../middleware";
-import { httpStatus, fetchHelper } from "../../helpers";
+import cacheHandler from "@middleware/cacheHandler";
+import httpStatus from "@helpers/httpStatus";
+import fetchHelper from "@helpers/fetchHelper";
 
 class Movie {
   public routes: Router;
@@ -44,7 +45,7 @@ class Movie {
     await cacheObj.setAsync(req.originalUrl, JSON.stringify(data));
     const cachePolicy = { "Cache-Control": "public", "max-age": 60 };
 
-    res
+    return res
       .header(cachePolicy)
       .status(httpStatus.OK)
       .json(data);

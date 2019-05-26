@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import httpStatus from "../helpers/httpStatus";
+import httpStatus from "@helpers/httpStatus";
 
 function errorHandler(
   err: Error,
