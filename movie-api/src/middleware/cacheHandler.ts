@@ -10,11 +10,11 @@ const cacheHandler = async (
   const keyName = req.originalUrl || req.url;
   logger.info(`Search for ${keyName} on redis`);
   const data = await cache.getAsync(keyName);
-  // const cachePolicy = { "Cache-Control": "public", "max-age": 60 };
+  const cachePolicy = { "Cache-Control": "public", "max-age": 60 };
 
   if (data) {
     logger.info(`Hit cache for ${keyName}`);
-    return res.send(JSON.parse(data));
+    return res.header(cachePolicy).send(JSON.parse(data));
   } else {
     res.sendResponse = res.send;
     res.send = (body: any): any => {
@@ -22,7 +22,7 @@ const cacheHandler = async (
         logger.info(`Saving cache for ${keyName}`);
         cache.setAsync(keyName, body);
       }
-      return res.sendResponse(body);
+      return res.header(cachePolicy).sendResponse(body);
     };
 
     next();
