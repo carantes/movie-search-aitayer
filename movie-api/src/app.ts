@@ -1,10 +1,9 @@
 import "module-alias/register";
 import server from "@config/server";
-import Cache from "@config/Cache";
+import cache from "@config/cache";
 import logger from "@config/logger";
-import { PORT, REDIS_HOST, REDIS_PORT } from "@config/settings";
+import { PORT } from "@helpers/constants";
 
-const cache = new Cache(REDIS_HOST, parseInt(<string>REDIS_PORT));
 server.set("cache", cache);
 
 server.listen(parseInt(<string>PORT), () => {
