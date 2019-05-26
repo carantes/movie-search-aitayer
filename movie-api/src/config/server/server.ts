@@ -17,8 +17,6 @@ class Server {
   }
 
   private config(): void {
-    // TODO: Middleware para tratar CSP errors
-    // TODO: Middleware de logs
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(errorHandler);

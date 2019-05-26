@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import httpStatus from "@helpers/httpStatus";
+import logger from "@config/logger";
 
 function errorHandler(
   err: Error,
@@ -7,7 +8,7 @@ function errorHandler(
   res: Response,
   next: NextFunction,
 ) {
-  console.error(err.stack);
+  logger.error(err.stack);
   res.status(httpStatus.ServerError).send("Ops, something is wrong!");
 }
 

@@ -3,6 +3,7 @@ import { check, validationResult } from "express-validator/check";
 import cacheHandler from "@middleware/cacheHandler";
 import httpStatus from "@helpers/httpStatus";
 import fetchHelper from "@helpers/fetchHelper";
+import logger from "@config/logger";
 
 class Movie {
   public routes: Router;
@@ -23,37 +24,45 @@ class Movie {
       .get("/clear", this.flushCache);
   }
 
-  private getMovies = async (
+  public getMovies = async (
     req: Request,
     res: Response,
     next: NextFunction,
   ) => {
     const { keyword = "" } = req.query;
-    const urlPage1 = this.getURLParams(keyword, 1);
-    const urlPage2 = this.getURLParams(keyword, 2);
+    logger.info(`Get movies with keyword: ${keyword}`);
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      logger.warn(`Request validation error for keyword: ${keyword}`, errors);
       return res.status(httpStatus.BadRequest).json({ errors: errors.array() });
     }
 
+    const urlPage1 = this.getURLParams(keyword, 1);
+    const urlPage2 = this.getURLParams(keyword, 2);
+
     const data = await fetchHelper
       .getAll([urlPage1, urlPage2])
-      .then(this.parseMovies);
+      .then(this.parseMovies)
+      .catch(logger.error);
 
-    const cacheObj = req.app.get("cache"); //Redis
-    await cacheObj.setAsync(req.originalUrl, JSON.stringify(data));
-    const cachePolicy = { "Cache-Control": "public", "max-age": 60 };
-
-    return res
-      .header(cachePolicy)
-      .status(httpStatus.OK)
-      .json(data);
+    return res.status(httpStatus.OK).json(data);
   };
 
-  private flushCache = async (req: Request, res: Response) => {
-    const result = await req.app.get("cache").flushdbAsync();
-    res.status(httpStatus.OK).send(result);
+  public flushCache = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    logger.info(`Start flushing cache...`);
+
+    try {
+      const result = await req.app.get("cache").flushdbAsync();
+      logger.info(`Cache is empty`);
+      res.status(httpStatus.OK).send(result);
+    } catch (err) {
+      next(err);
+    }
   };
 
   private getURLParams = (keyword: string, page: number) => {

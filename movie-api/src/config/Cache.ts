@@ -1,5 +1,6 @@
 import * as redis from "redis";
 import { promisify } from "util";
+import logger from "@config/logger";
 
 class Cache extends redis.RedisClient {
   public getAsync: Promise<any>;
@@ -14,11 +15,11 @@ class Cache extends redis.RedisClient {
     this.flushdbAsync = promisify(this.flushdb).bind(this);
 
     this.on("connect", () => {
-      console.log(`REDIS connected on host ${host} and port ${port}`);
+      logger.info(`REDIS connected on host ${host} and port ${port}`);
     });
 
     this.on("error", e => {
-      console.log("REDIS ERROR", e);
+      logger.info("REDIS ERROR", e);
     });
   }
 }

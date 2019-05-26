@@ -12,9 +12,9 @@ class Healthcheck {
     this.routes.get("/", this.getHealthcheck);
   }
 
-  private getHealthcheck(_: Request, res: Response): void {
+  public getHealthcheck(_: Request, res: Response): void {
     res.status(200).send({
-      message: "Movie API is running..."
+      message: "Movie API is running...",
     });
   }
 }
