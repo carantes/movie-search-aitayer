@@ -1,6 +1,6 @@
 import { Router, Request, Response, NextFunction, response } from "express";
 import { check, validationResult } from "express-validator/check";
-import cacheHandler from "@middleware/cacheHandler";
+import cacheHandler from "@middlewares/cacheHandler";
 import httpStatus from "@helpers/httpStatus";
 import fetchHelper from "@helpers/fetchHelper";
 import logger from "@config/logger";

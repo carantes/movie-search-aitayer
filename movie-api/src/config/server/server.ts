@@ -3,7 +3,7 @@ import * as bodyParser from "body-parser";
 import { Application, Request, Response, NextFunction } from "express";
 import * as helmet from "helmet";
 import * as responseTime from "response-time";
-import errorHandler from "@middleware/errorHandler";
+import errorHandler from "@middlewares/errorHandler";
 import healthcheck from "@modules/healthcheck";
 import movie from "@modules/movie";
 

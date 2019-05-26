@@ -13,7 +13,7 @@
     "paths": {
       "@config/*": ["config/*"],
       "@helpers/*": ["helpers/*"],
-      "@middleware/*": ["middleware/*"],
+      "@middlewares/*": ["middlewares/*"],
       "@modules/*": ["modules/*"]
     }
   },
