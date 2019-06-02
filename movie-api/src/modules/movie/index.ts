@@ -1,3 +1,1 @@
-import movie from "./movie";
-
-export default movie;
+export { default } from "./movie";

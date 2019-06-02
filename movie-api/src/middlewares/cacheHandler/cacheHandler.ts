@@ -1,15 +1,15 @@
 import { Request, Response, NextFunction } from "express";
 import logger from "@config/logger";
+import { CacheClient } from "@config/cache";
 
-const cacheHandler = async (
+const cacheHandler = (client: CacheClient) => async (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  const cache = req.app.get("cache"); //redis
-  const keyName = req.originalUrl || req.url;
+  const keyName = req.originalUrl;
   logger.info(`Search for ${keyName} on redis`);
-  const data = await cache.getAsync(keyName);
+  const data = await client.getAsync(keyName);
   const cachePolicy = { "Cache-Control": "public", "max-age": 60 };
 
   if (data) {
@@ -20,7 +20,7 @@ const cacheHandler = async (
     res.send = (body: any): any => {
       if (!JSON.parse(body).errors) {
         logger.info(`Saving cache for ${keyName}`);
-        cache.setAsync(keyName, body);
+        client.setAsync(keyName, body);
       }
       return res.header(cachePolicy).sendResponse(body);
     };

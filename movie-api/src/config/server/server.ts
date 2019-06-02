@@ -1,19 +1,19 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
-import { Application, Request, Response, NextFunction } from "express";
+import { Application } from "express";
 import * as helmet from "helmet";
 import * as responseTime from "response-time";
 import errorHandler from "@middlewares/errorHandler";
-import healthcheck from "@modules/healthcheck";
-import movie from "@modules/movie";
-
+import logger from "@config/logger";
 class Server {
   public app: Application;
+  public port: number;
 
-  constructor() {
+  constructor(controllers: Array<any>, port: number) {
     this.app = express();
     this.config();
-    this.routes();
+    this.routes(controllers);
+    this.port = port;
   }
 
   private config(): void {
@@ -25,10 +25,17 @@ class Server {
     this.app.use(responseTime());
   }
 
-  private routes(): void {
-    this.app.use("/", healthcheck);
-    this.app.use("/api", movie);
+  private routes(controllers: Array<any>): void {
+    controllers.forEach(controller => {
+      this.app.use("/", controller.router);
+    });
+  }
+
+  public listen(): void {
+    this.app.listen(this.port, () => {
+      logger.info(`Running app at http://localhost:${this.port}`);
+    });
   }
 }
 
-export default new Server().app;
+export default Server;

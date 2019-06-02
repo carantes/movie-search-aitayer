@@ -1,14 +1,17 @@
 import "module-alias/register";
-import server from "@config/server";
-import cache from "@config/cache";
+import Server from "@config/server";
+import Cache from "@config/cache";
 import logger from "@config/logger";
-import { PORT } from "@helpers/constants";
+import { PORT, REDIS_HOST, REDIS_PORT } from "@helpers/constants";
+import Healthcheck from "@modules/healthcheck";
+import Movie from "@modules/movie";
+import Admin from "@modules/admin";
 
-server.set("cache", cache);
+const cache = new Cache(REDIS_HOST, parseInt(<string>REDIS_PORT));
+const controllers = [new Healthcheck(), new Movie(cache), new Admin(cache)];
+const server = new Server(controllers, parseInt(<string>PORT));
 
-server.listen(parseInt(<string>PORT), () => {
-  logger.info(`Running app at http://localhost:${PORT}`);
-});
+server.listen();
 
 process.on("uncaughtException", err => {
   logger.error("There was an uncaught error", err);

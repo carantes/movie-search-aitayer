@@ -1,3 +1,1 @@
-import healthcheck from "./healthcheck";
-
-export default healthcheck;
+export { default } from "./healthcheck";

@@ -1,1 +1,1 @@
-export { default } from "./cache";
+export { CacheClient, default } from "./cache";

@@ -1,30 +1,28 @@
 import { Router, Request, Response, NextFunction, response } from "express";
 import { check, validationResult } from "express-validator/check";
+import { OMDB_API_KEY, OMDB_API_URL } from "@helpers/constants";
+import { CacheClient } from "@config/cache";
 import cacheHandler from "@middlewares/cacheHandler";
 import httpStatus from "@helpers/httpStatus";
 import fetchHelper from "@helpers/fetchHelper";
 import logger from "@config/logger";
 
 class Movie {
-  public routes: Router;
+  public path = "/api/search";
+  public router = Router();
 
-  constructor() {
-    this.routes = Router();
-    this.config();
+  constructor(cache?: CacheClient) {
+    this.config(cache);
   }
 
-  private config(): void {
-    this.routes
-      .get(
-        "/search",
-        [check("keyword").isLength({ min: 3 })],
-        cacheHandler,
-        this.getMovies,
-      )
-      .get("/clear", this.flushCache);
-  }
+  private config = (cache?: CacheClient) => {
+    const middlewares: Array<any> = [[check("keyword").isLength({ min: 3 })]];
+    cache && middlewares.push(cacheHandler(cache));
 
-  public getMovies = async (
+    this.router.get(this.path, ...middlewares, this.getMovies);
+  };
+
+  private getMovies = async (
     req: Request,
     res: Response,
     next: NextFunction,
@@ -49,24 +47,7 @@ class Movie {
     return res.status(httpStatus.OK).json(data);
   };
 
-  public flushCache = async (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) => {
-    logger.info(`Start flushing cache...`);
-
-    try {
-      const result = await req.app.get("cache").flushdbAsync();
-      logger.info(`Cache is empty`);
-      res.status(httpStatus.OK).send(result);
-    } catch (err) {
-      next(err);
-    }
-  };
-
   private getURLParams = (keyword: string, page: number) => {
-    const { OMDB_API_KEY, OMDB_API_URL } = process.env;
     return `${OMDB_API_URL}?apikey=${OMDB_API_KEY}&s=${keyword}&page=${page}`;
   };
 
@@ -75,4 +56,4 @@ class Movie {
   };
 }
 
-export default new Movie().routes;
+export default Movie;

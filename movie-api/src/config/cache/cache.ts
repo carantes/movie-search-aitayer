@@ -1,30 +1,33 @@
 import * as redis from "redis";
 import { promisify } from "util";
 import logger from "@config/logger";
-import { REDIS_HOST, REDIS_PORT } from "@helpers/constants";
 
-class Cache extends redis.RedisClient {
-  public getAsync: Promise<any>;
-  public setAsync: Promise<any>;
-  public flushdbAsync: Promise<any>;
+class Cache implements CacheClient {
+  public getAsync: (key: string) => Promise<any>;
+  public setAsync: (key: string, value: string) => Promise<any>;
+  public flushdbAsync: any;
 
-  constructor() {
-    super({ host: REDIS_HOST, port: parseInt(<string>REDIS_PORT) });
+  constructor(host: string, port: number) {
+    const client = new redis.RedisClient({ host, port });
 
-    this.getAsync = promisify(this.get).bind(this);
-    this.setAsync = promisify(this.set).bind(this);
-    this.flushdbAsync = promisify(this.flushdb).bind(this);
+    this.getAsync = promisify(client.get).bind(client);
+    this.setAsync = promisify(client.set).bind(client);
+    this.flushdbAsync = promisify(client.flushdb).bind(client);
 
-    this.on("connect", () => {
-      logger.info(
-        `REDIS connected on host ${REDIS_HOST} and port ${REDIS_PORT}`,
-      );
+    client.on("connect", () => {
+      logger.info(`REDIS connected on host ${host} and port ${port}`);
     });
 
-    this.on("error", e => {
+    client.on("error", e => {
       logger.error("REDIS ERROR", e);
     });
   }
 }
 
-export default new Cache();
+export interface CacheClient {
+  getAsync(key: string): Promise<any>;
+  setAsync(key: string, value: string): Promise<any>;
+  flushdbAsync(): Promise<any>;
+}
+
+export default Cache;
