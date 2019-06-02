@@ -1,12 +1,13 @@
 import React from "react";
 import { shallow } from "enzyme";
-import Home from "./Home";
+import { Home } from "./Home";
 
 describe("Home", () => {
   let home;
 
   beforeEach(() => {
-    home = shallow(<Home />);
+    const dummy = () => {};
+    home = shallow(<Home getMovies={dummy} />);
   });
 
   it("should render properly", () => {

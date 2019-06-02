@@ -7,7 +7,7 @@ import { WAIT_INTERVAL, TYPE_COUNT } from "Utils";
 
 const { Wrapper, Header, Main } = Layout;
 
-const Home = ({ movies, loading, getMovies }) => (
+export const Home = ({ movies, loading, getMovies }) => (
   <Wrapper>
     <Header title="Movie Search">
       <Search

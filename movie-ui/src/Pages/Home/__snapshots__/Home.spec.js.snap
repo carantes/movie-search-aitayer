@@ -1,3 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Home should render properly 1`] = `undefined`;
+exports[`Home should render properly 1`] = `
+<Wrapper>
+  <Header
+    title="Movie Search"
+  >
+    <With
+      onSearch={[Function]}
+      startWith={3}
+      waitInterval={300}
+    />
+  </Header>
+  <Main>
+    <onlyUpdateForKeys(Loader)
+      color="#000000"
+      css={Object {}}
+      loading={false}
+      size={35}
+      sizeUnit="px"
+    />
+    <MovieList
+      movies={Array []}
+    />
+  </Main>
+</Wrapper>
+`;
