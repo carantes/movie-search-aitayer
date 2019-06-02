@@ -1,10 +1,5 @@
 import CacheHandler from "./cacheHandler";
-import {
-  mockRequest,
-  mockResponse,
-  mockRedis,
-  result,
-} from "../../tests/mocks";
+import { mockRequest, mockResponse, mockRedis, result } from "@tests/mocks";
 
 describe("Cache Handler", () => {
   let req: any;

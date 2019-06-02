@@ -14,7 +14,8 @@
       "@config/*": ["config/*"],
       "@helpers/*": ["helpers/*"],
       "@middlewares/*": ["middlewares/*"],
-      "@modules/*": ["modules/*"]
+      "@modules/*": ["modules/*"],
+      "@tests/*": ["tests/*"]
     }
   },
   "include": ["/**/*.ts"],

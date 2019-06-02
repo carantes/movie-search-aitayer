@@ -1,6 +1,6 @@
 import httpStatus from "@helpers/httpStatus";
 import errorHandler from "./errorHandler";
-import { mockRequest, mockResponse } from "../../tests/mocks";
+import { mockRequest, mockResponse } from "@tests/mocks";
 
 describe("Error Handler", () => {
   let req: any;

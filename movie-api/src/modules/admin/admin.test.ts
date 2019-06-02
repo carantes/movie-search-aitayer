@@ -3,7 +3,7 @@ import Server from "@config/server";
 import { PORT } from "@helpers/constants";
 import Admin from "@modules/admin";
 import httpStatus from "@helpers/httpStatus";
-import { mockRedis } from "../../tests/mocks";
+import { mockRedis } from "@tests/mocks";
 
 describe("Admin", () => {
   let server: Server;

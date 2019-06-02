@@ -4,7 +4,7 @@ import Server from "@config/server";
 import { PORT, OMDB_API_KEY, OMDB_API_URL } from "@helpers/constants";
 import httpStatus from "@helpers/httpStatus";
 import Movie from "@modules/movie";
-import { movies, result } from "../../tests/mocks";
+import { movies, result } from "@tests/mocks";
 
 describe("Movie", () => {
   let server: Server;
