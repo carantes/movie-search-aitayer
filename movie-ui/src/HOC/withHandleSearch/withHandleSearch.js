@@ -13,7 +13,7 @@ const withHandleSearch = WrappedComponent => {
     handleChange = e => {
       clearTimeout(this.timer);
       const param = e.target.value;
-      const { onSearch, startWith = 3, waitInterval = 0 } = this.props;
+      const { onSearch, startWith, waitInterval } = this.props;
       this.timer = setTimeout(() => {
         if (param.length >= startWith) {
           onSearch(param);
@@ -26,16 +26,16 @@ const withHandleSearch = WrappedComponent => {
     }
   }
 
-  // With.defaultProps = {
-  //   startWith: 3,
-  //   waitInterval: 0,
-  // };
+  With.defaultProps = {
+    startWith: 3,
+    waitInterval: 0,
+  };
 
-  // With.propTypes = {
-  //   onSearch: PropTypes.func.isRequired,
-  //   startWith: PropTypes.number,
-  //   waitInterval: PropTypes.number,
-  // };
+  With.propTypes = {
+    onSearch: PropTypes.func.isRequired,
+    startWith: PropTypes.number,
+    waitInterval: PropTypes.number,
+  };
 
   return With;
 };

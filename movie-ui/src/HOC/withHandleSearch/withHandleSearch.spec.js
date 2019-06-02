@@ -8,8 +8,7 @@ describe("Search", () => {
   let search;
 
   beforeEach(() => {
-    let dummy = () => <input />;
-    const HOC = withHandleSearch(dummy);
+    const HOC = withHandleSearch(props => <input {...props} />);
     search = mount(<HOC onSearch={stub} waitInterval={waittime} />);
   });
 
@@ -28,7 +27,7 @@ describe("Search", () => {
     }, waittime);
   });
 
-  it.skip("should callback search function after type 3 characters", done => {
+  it("should callback search function after type 3 characters", done => {
     const input = search.find("input").at(0);
     input.instance().value = "foo";
     input.simulate("change");
@@ -39,7 +38,7 @@ describe("Search", () => {
     }, waittime);
   });
 
-  it.skip("should respect waittime", function() {
+  it("should respect waittime", function() {
     jest.useFakeTimers();
     search.find("input").simulate("change", { target: { value: "Foo" } });
     expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), waittime);

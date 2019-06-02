@@ -70,7 +70,8 @@
       "@config(.*)$": "<rootDir>/src/config/$1",
       "@helpers(.*)$": "<rootDir>/src/helpers/$1",
       "@middlewares(.*)$": "<rootDir>/src/middlewares/$1",
-      "@modules(.*)$": "<rootDir>/src/modules/$1"
+      "@modules(.*)$": "<rootDir>/src/modules/$1",
+      "@tests(.*)$": "<rootDir>/src/tests/$1"
     }
   }
 }

@@ -33,15 +33,6 @@ const movies = [
   },
 ];
 
-const apiFetch = () => {
-  return Promise.resolve({
-    response: {
-      results: movies,
-    },
-  });
-};
-
 export default {
   movies,
-  apiFetch,
 };

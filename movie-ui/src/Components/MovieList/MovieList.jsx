@@ -4,7 +4,7 @@ import Movie from "Components/Movie";
 import styles from "./MovieList.module.css";
 
 const MovieList = props => {
-  const { movies = [] } = props;
+  const { movies } = props;
 
   if (movies.length === 0) {
     return <span>No movies to show.</span>;

@@ -3,14 +3,21 @@
 exports[`Search should render properly 1`] = `
 <With
   onSearch={[MockFunction]}
+  startWith={3}
   waitInterval={1}
 >
-  <dummy
+  <Component
     onChange={[Function]}
     onSearch={[MockFunction]}
+    startWith={3}
     waitInterval={1}
   >
-    <input />
-  </dummy>
+    <input
+      onChange={[Function]}
+      onSearch={[MockFunction]}
+      startWith={3}
+      waitInterval={1}
+    />
+  </Component>
 </With>
 `;

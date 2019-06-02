@@ -104,6 +104,10 @@ npm start
 npm tests
 ```
 
+```sh
+npm run coverage
+```
+
 #### Endpoints
 
 ```js
@@ -142,6 +146,16 @@ npm install
 
 ```sh
 npm start
+```
+
+#### Testing
+
+```sh
+npm tests
+```
+
+```sh
+npm run coverage
 ```
 
 <http://localhost:3000/>

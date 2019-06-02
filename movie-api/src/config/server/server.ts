@@ -31,7 +31,7 @@ class Server {
     });
   }
 
-  public listen(): void {
+  public listen(): any {
     this.app.listen(this.port, () => {
       logger.info(`Running app at http://localhost:${this.port}`);
     });
